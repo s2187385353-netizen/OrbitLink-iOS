@@ -36,6 +36,10 @@
           }
         },
         {
+          "name": "Apply verified UIKit link fix",
+          "run": "python3 - <<'PY'\nimport pathlib, hashlib\np = pathlib.Path('source/OrbitLink-iOS-1.0.0/Configuration/Project.xcconfig')\nassert hashlib.sha256(p.read_bytes()).hexdigest() == '8bbd23bc965489ca6dd8c1da31d200d686a18cbbb452f08206511b422025682b', 'Unexpected project configuration'\np.write_text(p.read_text() + '\\nOTHER_LDFLAGS = $(inherited) -framework UIKit\\n')\nPY"
+        },
+        {
           "name": "Run native build checks",
           "working-directory": "source/OrbitLink-iOS-1.0.0",
           "run": "python3 scripts/cloud-check.py"
